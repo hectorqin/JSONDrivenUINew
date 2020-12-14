@@ -11,9 +11,16 @@ import KingfisherSwiftUI
 internal struct ViewFactory: PresentableProtocol {
     
     private let material: ViewMaterial
+    private let date: Date?
     
     init(material: ViewMaterial) {
         self.material = material
+        self.date = nil
+    }
+    
+    init(material: ViewMaterial, date: Date?) {
+        self.material = material
+        self.date = date
     }
     
     // MARK: - ScrollView
@@ -103,6 +110,17 @@ internal struct ViewFactory: PresentableProtocol {
             .fontWeight(fontWeight)
     }
     
+    // MARK: - Timer
+    @ViewBuilder func timer() -> some View {
+        let fontHashValue = material.properties?.font ?? "body"
+        let font = Font.pick[fontHashValue]
+        let fontWeightHashValue = material.properties?.fontWeight ?? "regular"
+        let fontWeight = Font.Weight.pick[fontWeightHashValue]
+        Text(date ?? Date(), style: Text.DateStyle.pick[material.values?.dateStyle ?? "timer"] ?? .timer)
+            .font(font)
+            .fontWeight(fontWeight)
+    }
+    
     // MARK: - Image
     @ViewBuilder func image() -> some View {
         if let systemIconName = material.values?.systemIconName {
@@ -137,6 +155,7 @@ internal struct ViewFactory: PresentableProtocol {
         case .HStack: hstack()
         case .ZStack: zstack()
         case .Text: text()
+        case .Timer: timer()
         case .Image: image()
         case .Spacer: spacer()
         case .Rectangle: Rectangle()

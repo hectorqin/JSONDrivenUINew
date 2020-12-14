@@ -9,6 +9,7 @@ import Foundation
 
 internal enum ViewType: String, Codable {
     case Image      = "Image"
+    case Timer      = "Timer"
     case Text       = "Text"
     case HStack     = "HStack"
     case VStack     = "VStack"

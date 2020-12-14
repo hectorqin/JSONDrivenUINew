@@ -10,9 +10,15 @@ import SwiftUI
 public struct JSONDataView: View, JSONDataViewProtocol {
     
     public var json: Data
+    public var date: Date?
     
     public init(json: Data) {
         self.json = json
+    }
+    
+    public init(json: Data, date: Date) {
+        self.json = json
+        self.date = date
     }
     
     @ViewBuilder public func toPresentable() -> some View {
