@@ -25,9 +25,6 @@ let package = Package(
             name: "JSONDrivenUI",
             dependencies: [
                 .product(name: "KingfisherSwiftUI", package: "Kingfisher")
-            ],
-            exclude: [
-                "Preview"
             ])
     ]
 )

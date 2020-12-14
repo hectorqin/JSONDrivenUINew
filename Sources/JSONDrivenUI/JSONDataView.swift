@@ -10,7 +10,7 @@ import SwiftUI
 public struct JSONDataView: View, JSONDataViewProtocol {
     
     public var json: Data
-    public var date: Date?
+    public var date: Date? = nil
     
     public init(json: Data) {
         self.json = json
