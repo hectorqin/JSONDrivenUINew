@@ -10,6 +10,9 @@ import Foundation
 internal protocol JSONDataViewProtocol: PresentableProtocol {
 
     var json: Data { get }
+    var date: Date? { get }
+    
     init(json: Data)
+    init(json: Data, date: Date)
     
 }
