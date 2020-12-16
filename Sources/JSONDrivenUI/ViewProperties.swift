@@ -12,6 +12,7 @@ internal class ViewProperties: Codable {
     var font: String? = "body"
     var fontWeight: String? = "body"
     var foregroundColor: String? = "#ffffff" // Hex
+    var backgroundColor: String? = "#ffffff00" // Hex
     var borderColor: String? = "#ff0000"// Hex
     var borderWidth: Int? = 0
     var padding: Int? = 0

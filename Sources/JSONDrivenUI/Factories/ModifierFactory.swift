@@ -32,6 +32,18 @@ internal struct ModifierFactory {
         }
     }
     
+    struct BackgroundModifier: ViewModifier {
+        var backgroundColor: Color?
+        
+        @ViewBuilder func body(content: Content) -> some View {
+            if let color = backgroundColor {
+                content.background(color)
+            } else {
+                content
+            }
+        }
+    }
+    
     /// Applies Padding for all edges in case `padding` is not nil.
     struct PaddingModifier: ViewModifier {
         var padding: CGFloat?

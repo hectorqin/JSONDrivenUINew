@@ -173,6 +173,7 @@ internal struct ViewFactory: PresentableProtocol {
         uiComponent
             .modifier(ModifierFactory.PaddingModifier(padding: prop?.padding.toCGFloat()))
             .modifier(ModifierFactory.ForegroundModifier(foregroundColor: prop?.foregroundColor.toColor()))
+            .modifier(ModifierFactory.BackgroundModifier(backgroundColor: prop?.backgroundColor.toColor()))
             .modifier(ModifierFactory.BorderModifier(
                 borderColor: prop?.borderColor.toColor(),
                 borderWidth: prop?.borderWidth.toCGFloat()
