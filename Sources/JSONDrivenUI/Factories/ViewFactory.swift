@@ -160,7 +160,8 @@ internal struct ViewFactory: PresentableProtocol {
         Chart(style: Chart.Style(rawValue: material.properties?.chartStyle ?? ""),
               data: material.values?.chartData,
               backgroundColor: material.properties?.chartBackgroundColor.toColor(),
-              foregroundColor: material.properties?.chartForegroundColor.toColor())
+              foregroundColor: material.properties?.chartForegroundColor.toColor(),
+              lineChartVpHeightPercent: material.properties?.chartLineChartVpHeightPercent)
     }
 
     @ViewBuilder func buildDefault() -> some View {
