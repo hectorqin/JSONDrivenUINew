@@ -161,7 +161,7 @@ internal struct ViewFactory: PresentableProtocol {
               data: material.values?.chartData,
               backgroundColor: material.properties?.chartBackgroundColor.toColor(),
               foregroundColor: material.properties?.chartForegroundColor.toColor(),
-              lineChartVpHeightPercent: material.properties?.chartLineChartVpHeightPercent)
+              paddingBottomPercentage: material.properties?.chartLineChartPaddingBottomPercentage)
     }
 
     @ViewBuilder func buildDefault() -> some View {

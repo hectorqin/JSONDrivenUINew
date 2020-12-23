@@ -16,23 +16,23 @@ struct Chart: View {
 
     let style: Style
     let data: [Double]
-    let lineChartVpHeightPercent: CGFloat
+    let paddingBottomPercentage: Double
 
     private let internalStyle: ChartStyle
 
-    init(style: Style?, data: [Double]?, backgroundColor: Color?, foregroundColor: Color?, lineChartVpHeightPercent: Double?) {
+    init(style: Style?, data: [Double]?, backgroundColor: Color?, foregroundColor: Color?, paddingBottomPercentage: Double?) {
         self.style = style ?? .line
         self.data = data ?? []
         self.internalStyle = ChartStyle(
             backgroundColor: backgroundColor ?? Color.white.opacity(0),
             foregroundColor: [ColorGradient(foregroundColor ?? Color.black, foregroundColor ?? Color.black)])
-        self.lineChartVpHeightPercent = lineChartVpHeightPercent != nil ? CGFloat(lineChartVpHeightPercent!) : 1.0
+        self.paddingBottomPercentage = paddingBottomPercentage ?? 0
     }
 
     var body: some View {
         switch style {
         case .line:
-            LineChart(vpHeightPercent: lineChartVpHeightPercent).data(data).chartStyle(internalStyle).allowsHitTesting(false)
+            LineChart(paddingBottomPercentage: paddingBottomPercentage).data(data).chartStyle(internalStyle).allowsHitTesting(false)
         case .bar:
             BarChart().data(data).chartStyle(internalStyle).allowsHitTesting(false)
         }

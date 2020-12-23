@@ -35,7 +35,7 @@ internal class ViewProperties: Codable {
     var chartStyle: String? = Chart.Style.line.rawValue
     var chartBackgroundColor: String? = "#ffffff00" // Hex
     var chartForegroundColor: String? = "#000000" // Hex
-    var chartLineChartVpHeightPercent: Double? = 1.0
+    var chartLineChartPaddingBottomPercentage: Double? = 0
 }
 
 // ScrollView
