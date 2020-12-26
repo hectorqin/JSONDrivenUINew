@@ -16,7 +16,6 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/onevcat/Kingfisher.git", from: "5.15.7"),
         .package(name: "SwiftUICharts", url: "https://github.com/SumiMakito/ChartView.git", .revision("dce7ba7661f61af7ac7925a33a4373359e3e9dc7"))
     ],
     targets: [
@@ -25,7 +24,6 @@ let package = Package(
         .target(
             name: "JSONDrivenUI",
             dependencies: [
-                .product(name: "KingfisherSwiftUI", package: "Kingfisher"),
                 .product(name: "SwiftUICharts", package: "SwiftUICharts")
             ])
     ])

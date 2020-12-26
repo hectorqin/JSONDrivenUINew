@@ -5,7 +5,6 @@
 //  Created by Enes Karaosman on 27.11.2020.
 //
 
-import KingfisherSwiftUI
 import SwiftUI
 
 internal struct ViewFactory: PresentableProtocol {
@@ -139,9 +138,7 @@ internal struct ViewFactory: PresentableProtocol {
                 .scaledToFit()
 
         } else if let remoteUrl = material.values?.imageUrl {
-            KFImage(URL(string: remoteUrl))
-                .resizable()
-                .scaledToFit()
+            NetworkImage(url: URL(string: remoteUrl))
         } else {
             Text("Image value could not read")
         }
