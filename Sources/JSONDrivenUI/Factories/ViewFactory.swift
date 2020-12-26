@@ -160,6 +160,13 @@ internal struct ViewFactory: PresentableProtocol {
               foregroundColor: material.properties?.chartForegroundColor.toColor(),
               paddingBottomPercentage: material.properties?.chartLineChartPaddingBottomPercentage)
     }
+    
+    // MARK: - Color
+
+    @ViewBuilder func color() -> some View {
+        material.values?.hex.toColor()
+            .ignoresSafeArea()
+    }
 
     @ViewBuilder func buildDefault() -> some View {
         switch material.type {
@@ -173,6 +180,7 @@ internal struct ViewFactory: PresentableProtocol {
         case .Image: image()
         case .Spacer: spacer()
         case .Chart: chart()
+        case .Color: color()
         case .Rectangle: Rectangle()
         case .Divider: Divider()
         case .Circle: Circle()

@@ -15,6 +15,7 @@ internal class Values: Codable {
     var systemIconName: String?
     var localImageName: String?
     
+    var hex: String?
     var chartData: [Double]?
 }
 
