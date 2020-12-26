@@ -15,7 +15,7 @@ struct JSONUIPreview: View {
         {
             "type":"VStack",
             "values":{},
-            "properties":{"backgroundColor": "#ccc"},
+            "properties":{"backgroundColor": "#ccc","padding": "10 40 40 10"},
             "subviews":[{"type":"Text","values":{"text":"Con11111tent"},"properties":{"font":"body","foregroundColor":"#333","fontWeight":"bold"}},{"type":"Image","values":{"imageUrl":"https://xinxiao.tech/assets/products/duohui.png"},"properties":{"width":100,"height":100}}]
         
         }

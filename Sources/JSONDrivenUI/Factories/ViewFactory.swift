@@ -185,7 +185,7 @@ internal struct ViewFactory: PresentableProtocol {
 
         let uiComponent = buildDefault().embedInAnyView()
         uiComponent
-            .modifier(ModifierFactory.PaddingModifier(padding: prop?.padding.toCGFloat()))
+            .modifier(ModifierFactory.PaddingModifier(padding: prop?.padding.toPaddingEdgeInsets()))
             .modifier(ModifierFactory.ForegroundModifier(foregroundColor: prop?.foregroundColor.toColor()))
             .modifier(ModifierFactory.BackgroundModifier(backgroundColor: prop?.backgroundColor.toColor()))
             .modifier(ModifierFactory.BorderModifier(

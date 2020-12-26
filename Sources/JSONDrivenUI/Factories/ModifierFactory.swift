@@ -46,7 +46,7 @@ internal struct ModifierFactory {
     
     /// Applies Padding for all edges in case `padding` is not nil.
     struct PaddingModifier: ViewModifier {
-        var padding: CGFloat?
+        var padding: EdgeInsets?
         
         @ViewBuilder func body(content: Content) -> some View {
             if let padding = padding {

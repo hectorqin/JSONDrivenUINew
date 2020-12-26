@@ -15,7 +15,7 @@ internal class ViewProperties: Codable {
     var backgroundColor: String? = "#ffffff00" // Hex
     var borderColor: String? = "#ff0000" // Hex
     var borderWidth: Int? = 0
-    var padding: Int? = 0
+    var padding: String? = "0"
     var spacing: Int? = 0
     var width: Float?
     var height: Float?
@@ -113,5 +113,29 @@ extension Optional where Wrapped == String {
     func toColor() -> Color? {
         guard let nonNil = self else { return nil }
         return Color(hex: nonNil)
+    }
+    
+    func toPaddingEdgeInsets() -> EdgeInsets? {
+        guard let paddingStr = self else { return nil }
+        var edgeInsets = [CGFloat]()
+        let paddingStars = paddingStr.components(separatedBy: " ")
+        for p in paddingStars {
+            if let n = NumberFormatter().number(from: p) {
+                edgeInsets.append(CGFloat(truncating: n))
+            }
+        }
+        
+        switch (edgeInsets.count) {
+        case 0:
+            return nil
+        case 1:
+            return EdgeInsets(top: edgeInsets[0], leading: edgeInsets[0], bottom: edgeInsets[0], trailing: edgeInsets[0])
+        case 2:
+            return EdgeInsets(top: edgeInsets[0], leading: edgeInsets[1], bottom: edgeInsets[0], trailing: edgeInsets[1])
+        case 3:
+            return EdgeInsets(top: edgeInsets[0], leading: edgeInsets[1], bottom: edgeInsets[2], trailing: edgeInsets[1])
+        default:
+            return EdgeInsets(top: edgeInsets[0], leading: edgeInsets[3], bottom: edgeInsets[2], trailing: edgeInsets[1])
+        }
     }
 }
