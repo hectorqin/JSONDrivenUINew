@@ -33,8 +33,6 @@ internal class ViewProperties: Codable {
 
     /// chart settings
     var chartStyle: String? = Chart.Style.line.rawValue
-    var chartBackgroundColor: String? = "#ffffff00" // Hex
-    var chartForegroundColor: String? = "#000000" // Hex
     var chartLineChartPaddingBottomPercentage: Double? = 0
 }
 
