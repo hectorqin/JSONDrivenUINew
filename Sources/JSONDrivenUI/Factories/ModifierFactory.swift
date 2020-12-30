@@ -13,9 +13,14 @@ internal struct ModifierFactory {
     struct FrameModifier: ViewModifier {
         var width: CGFloat? = nil
         var height: CGFloat? = nil
+        var clipContent: Bool? = false
 
         @ViewBuilder func body(content: Content) -> some View {
-            content.frame(width: width, height: height)
+            if (clipContent != nil && clipContent == true) {
+                content.frame(width: width, height: height).clipped()
+            } else {
+                content.frame(width: width, height: height)
+            }
         }
     }
     

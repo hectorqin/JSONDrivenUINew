@@ -19,6 +19,7 @@ internal class ViewProperties: Codable {
     var spacing: Int? = 0
     var width: Float?
     var height: Float?
+    var clipContent: Bool?
     var minLength: Float? // Spacer
 
     /// leading, center, trailing
@@ -34,6 +35,9 @@ internal class ViewProperties: Codable {
     /// chart settings
     var chartStyle: String? = Chart.Style.line.rawValue
     var chartLineChartPaddingBottomPercentage: Double? = 0
+    
+    /// img
+    var scaleMode: String?
 }
 
 // ScrollView

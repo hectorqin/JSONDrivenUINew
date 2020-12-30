@@ -129,19 +129,28 @@ internal struct ViewFactory: PresentableProtocol {
 
     @ViewBuilder func image() -> some View {
         if let systemIconName = material.values?.systemIconName {
-            Image(systemName: systemIconName)
-                .resizable()
-                .scaledToFit()
+            if (material.properties?.scaleMode == "fill") {
+                Image(systemName: systemIconName)
+                    .resizable().scaledToFill()
+            } else {
+                Image(systemName: systemIconName)
+                    .resizable().scaledToFit()
+            }
         } else if let localIconName = material.values?.localImageName {
-            Image(localIconName)
-                .resizable()
-                .scaledToFit()
-
+            if (material.properties?.scaleMode == "fill") {
+                Image(localIconName)
+                    .resizable().scaledToFill()
+            } else {
+                Image(localIconName)
+                    .resizable().scaledToFit()
+            }
         } else if let remoteUrl = material.values?.imageUrl {
-            NetworkImage(url: URL(string: remoteUrl))
+            NetworkImage(url: URL(string: remoteUrl), mode: material.properties?.scaleMode)
         } else {
             Text("Image value could not read")
         }
+        
+        
     }
 
     // MARK: - Spacer
@@ -202,7 +211,8 @@ internal struct ViewFactory: PresentableProtocol {
             ))
             .modifier(ModifierFactory.FrameModifier(
                 width: prop?.width.toCGFloat(),
-                height: prop?.height.toCGFloat()
+                height: prop?.height.toCGFloat(),
+                clipContent: prop?.clipContent
             ))
     }
 }
