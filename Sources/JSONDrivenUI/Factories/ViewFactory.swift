@@ -209,6 +209,9 @@ internal struct ViewFactory: PresentableProtocol {
                 borderColor: prop?.borderColor.toColor(),
                 borderWidth: prop?.borderWidth.toCGFloat()
             ))
+            .modifier(ModifierFactory.ShadowModifier(
+                shadow: prop?.shadow.toShadow()
+            ))
             .modifier(ModifierFactory.FrameModifier(
                 width: prop?.width.toCGFloat(),
                 height: prop?.height.toCGFloat(),

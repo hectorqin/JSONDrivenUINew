@@ -76,4 +76,17 @@ internal struct ModifierFactory {
         }
     }
     
+    /// Applies Shadow in case `shadow` is not nil.
+    struct ShadowModifier: ViewModifier {
+        var shadow: UiShadow?
+        
+        @ViewBuilder func body(content: Content) -> some View {
+            if let uiShadow = shadow {
+                content.shadow(color: uiShadow.color!, radius: uiShadow.blur!, x: uiShadow.x!, y: uiShadow.y!)
+            } else {
+                content
+            }
+        }
+    }
+    
 }

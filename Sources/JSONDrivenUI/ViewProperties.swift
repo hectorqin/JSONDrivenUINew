@@ -21,6 +21,8 @@ internal class ViewProperties: Codable {
     var height: Float?
     var clipContent: Bool?
     var minLength: Float? // Spacer
+    
+    var shadow: String?
 
     /// leading, center, trailing
     var horizontalAlignment: String?
@@ -111,10 +113,29 @@ extension Optional where Wrapped == Float {
     }
 }
 
+struct UiShadow {
+    var color: Color? = nil
+    var x: CGFloat? = nil
+    var y: CGFloat? = nil
+    var blur: CGFloat? = nil
+}
+
 extension Optional where Wrapped == String {
     func toColor() -> Color? {
         guard let nonNil = self else { return nil }
         return Color(hex: nonNil)
+    }
+    
+    func toShadow() -> UiShadow? {
+        guard let shadowStr = self else { return nil }
+        let shadowSegments = shadowStr.components(separatedBy: " ")
+        let x = CGFloat(truncating: NumberFormatter().number(from: shadowSegments[0]) ?? 0)
+        let y = CGFloat(truncating: NumberFormatter().number(from: shadowSegments[1]) ?? 0)
+        let blur = CGFloat(truncating: NumberFormatter().number(from: shadowSegments[2]) ?? 0)
+        
+        let color = Color(hex: shadowSegments[3] ?? "#00000033")
+        
+        return UiShadow(color: color, x: x, y: y, blur: blur)
     }
     
     func toPaddingEdgeInsets() -> EdgeInsets? {
