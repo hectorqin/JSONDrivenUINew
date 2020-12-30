@@ -20,6 +20,7 @@ internal class ViewProperties: Codable {
     var width: Float?
     var height: Float?
     var clipContent: Bool?
+    var alignment: String?
     var minLength: Float? // Spacer
     
     var shadow: String?
@@ -67,6 +68,21 @@ extension SwiftUI.VerticalAlignment {
         "bottom": .bottom,
         "firstTextBaseline": .firstTextBaseline,
         "lastTextBaseline": .lastTextBaseline
+    ]
+}
+
+// Frame Alignment
+extension SwiftUI.Alignment {
+    static let pick: [String: SwiftUI.Alignment] = [
+        "top": .top,
+        "center": .center,
+        "bottom": .bottom,
+        "leading": .leading,
+        "trailing": .trailing,
+        "bottomLeading": .bottomLeading,
+        "bottomTrailing": .bottomTrailing,
+        "topLeading": .topLeading,
+        "topTrailing": .topTrailing
     ]
 }
 

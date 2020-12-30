@@ -215,7 +215,8 @@ internal struct ViewFactory: PresentableProtocol {
             .modifier(ModifierFactory.FrameModifier(
                 width: prop?.width.toCGFloat(),
                 height: prop?.height.toCGFloat(),
-                clipContent: prop?.clipContent
+                clipContent: prop?.clipContent,
+                alignment: Alignment.pick[prop?.alignment ?? "center"] ?? .center
             ))
     }
 }
