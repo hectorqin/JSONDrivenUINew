@@ -20,6 +20,22 @@ internal struct ViewFactory: PresentableProtocol {
         self.material = material
         self.date = date
     }
+    
+    func font() -> Font {
+        let font: Font
+        if let fontSize = material.properties?.fontSize {
+            let fontName = material.properties?.fontName ?? "system"
+            if fontName == "system" {
+                font = Font.system(size: fontSize)
+            } else {
+                font = Font.custom(fontName, size: fontSize)
+            }
+        } else {
+            let fontHashValue = material.properties?.font ?? "body"
+            font = Font.pick[fontHashValue]
+        }
+        return font
+    }
 
     // MARK: - ScrollView
 
@@ -104,19 +120,7 @@ internal struct ViewFactory: PresentableProtocol {
     // MARK: - Text
 
     @ViewBuilder func text() -> some View {
-        let font: Font
-        if let fontSize = material.properties?.fontSize {
-            let fontName = material.properties?.fontName ?? "system"
-            if fontName == "system" {
-                font = Font.system(size: fontSize)
-            } else {
-                font = Font.custom(fontName, size: fontSize)
-            }
-        } else {
-            let fontHashValue = material.properties?.font ?? "body"
-            font = Font.pick[fontHashValue]
-        }
-        
+        let font = font()
         let fontWeightHashValue = material.properties?.fontWeight ?? "regular"
         let fontWeight = Font.Weight.pick[fontWeightHashValue]
         Text(material.values?.text ?? "")
@@ -127,8 +131,7 @@ internal struct ViewFactory: PresentableProtocol {
     // MARK: - Timer
 
     @ViewBuilder func timer() -> some View {
-        let fontHashValue = material.properties?.font ?? "body"
-        let font = Font.pick[fontHashValue]
+        let font = font()
         let fontWeightHashValue = material.properties?.fontWeight ?? "regular"
         let fontWeight = Font.Weight.pick[fontWeightHashValue]
         Text(date ?? Date(), style: Text.DateStyle.pick[material.values?.dateStyle ?? "timer"] ?? .timer)
