@@ -21,18 +21,18 @@ internal struct ViewFactory: PresentableProtocol {
         self.date = date
     }
     
-    func font() -> Font {
+    func parseFont() -> Font {
         let font: Font
         if let fontSize = material.properties?.fontSize {
             let fontName = material.properties?.fontName ?? "system"
             if fontName == "system" {
-                font = Font.system(size: fontSize)
+                font = Font.system(size: CGFloat(fontSize))
             } else {
-                font = Font.custom(fontName, size: fontSize)
+                font = Font.custom(fontName, size: CGFloat(fontSize))
             }
         } else {
             let fontHashValue = material.properties?.font ?? "body"
-            font = Font.pick[fontHashValue]
+            font = Font.pick[fontHashValue] ?? Font.body
         }
         return font
     }
@@ -120,7 +120,7 @@ internal struct ViewFactory: PresentableProtocol {
     // MARK: - Text
 
     @ViewBuilder func text() -> some View {
-        let font = font()
+        let font = parseFont()
         let fontWeightHashValue = material.properties?.fontWeight ?? "regular"
         let fontWeight = Font.Weight.pick[fontWeightHashValue]
         Text(material.values?.text ?? "")
@@ -131,7 +131,7 @@ internal struct ViewFactory: PresentableProtocol {
     // MARK: - Timer
 
     @ViewBuilder func timer() -> some View {
-        let font = font()
+        let font = parseFont()
         let fontWeightHashValue = material.properties?.fontWeight ?? "regular"
         let fontWeight = Font.Weight.pick[fontWeightHashValue]
         Text(date ?? Date(), style: Text.DateStyle.pick[material.values?.dateStyle ?? "timer"] ?? .timer)
