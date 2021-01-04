@@ -15,8 +15,15 @@ internal class Values: Codable {
     var systemIconName: String?
     var localImageName: String?
     
+    // for Color
     var hex: String?
+    
+    // for Chart
     var chartData: [Double]?
+    
+    // for LinearGradient
+    var direction: String?
+    var gradient: String?
 }
 
 extension Text.DateStyle {

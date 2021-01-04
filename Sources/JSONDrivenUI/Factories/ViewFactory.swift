@@ -190,6 +190,15 @@ internal struct ViewFactory: PresentableProtocol {
         material.values?.hex.toColor()
             .ignoresSafeArea()
     }
+    
+    // MARK: - LinearGradient
+
+    @ViewBuilder func lineargradient() -> some View {
+        let gradient = material.values?.gradient.toGradient() ?? Gradient(colors: [Color.gray, Color.black])
+        let direction = material.values?.direction.toDirection() ?? (from: .top, to: .bottom)
+        LinearGradient(gradient: gradient, startPoint: direction.from, endPoint: direction.to)
+            .ignoresSafeArea()
+    }
 
     @ViewBuilder func buildDefault() -> some View {
         switch material.type {
@@ -204,6 +213,7 @@ internal struct ViewFactory: PresentableProtocol {
         case .Spacer: spacer()
         case .Chart: chart()
         case .Color: color()
+        case .LinearGradient: lineargradient()
         case .Rectangle: Rectangle()
         case .Divider: Divider()
         case .Circle: Circle()

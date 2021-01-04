@@ -45,6 +45,10 @@ internal class ViewProperties: Codable {
     
     /// img
     var scaleMode: String?
+    
+    /// LinearGradient
+    var direction: String?
+    var gradient: String?
 }
 
 // ScrollView
@@ -156,6 +160,71 @@ extension Optional where Wrapped == String {
         let color = Color(hex: shadowSegments[3] ?? "#00000033")
         
         return UiShadow(color: color, x: x, y: y, blur: blur)
+    }
+    
+    func toDirection() -> (from: UnitPoint, to: UnitPoint)? {
+        guard let directionStr = self else { return nil }
+        switch directionStr {
+        case "to bottom":
+            return (from: .top, to: .bottom)
+        case "to bottom right":
+            return (from: .topLeading, to: .bottomTrailing)
+        case "to bottom left":
+            return (from: .topTrailing, to: .bottomLeading)
+        case "to top":
+            return (from: .bottom, to: .top)
+        case "to top right":
+            return(from: .bottomLeading, to: .topTrailing)
+        case "to top left":
+            return (from: .bottomTrailing, to: .topLeading)
+        case "to left":
+            return (from: .trailing, to: .leading)
+        case "to right":
+            return (from: .leading, to: .trailing)
+        default:
+            let directionSegments = directionStr.components(separatedBy: " ")
+            if directionSegments.count == 2 {
+                if directionSegments[0].contains(",") && directionSegments[1].contains(",") {
+                    let points = directionSegments.map({ directionSegment -> UnitPoint in
+                        let pointXYStrings = directionSegment.components(separatedBy: ",")
+                        let x = CGFloat(truncating: NumberFormatter().number(from: pointXYStrings[0]) ?? 0)
+                        let y = CGFloat(truncating: NumberFormatter().number(from: pointXYStrings[1]) ?? 0)
+                        return UnitPoint(x:x, y: y)
+                    })
+                    return (from: points[0], to: points[1])
+                }
+            }
+            return (from: .top, to: .bottom)
+        }
+    }
+    
+    func toGradient() -> Gradient? {
+        guard let gradientStr = self else { return nil }
+        let gradientSegments = gradientStr.components(separatedBy: ",")
+        var gradientStops: [(color: Color, location: CGFloat?)] = []
+        for c in gradientSegments {
+            let color = c.trimmingCharacters(in: .whitespacesAndNewlines)
+            let colorSeg = color.components(separatedBy: " ")
+            if colorSeg.count > 1 {
+                gradientStops.append((color: Color(hex: colorSeg[0]), location: CGFloat(truncating: NumberFormatter().number(from: colorSeg[1]) ?? 0)))
+            } else {
+                gradientStops.append((color: Color(hex: colorSeg[0]), location: nil))
+            }
+        }
+        let useColorsRatherThanStops = gradientStops.contains { stop in
+            if stop.location == nil {
+                return true
+            }
+            return false
+        }
+        if useColorsRatherThanStops {
+            return Gradient(colors: gradientStops.map({ stop in
+                return stop.color
+            }))
+        }
+        return Gradient(stops:gradientStops.map({ stop in
+            return Gradient.Stop.init(color: stop.color, location: stop.location!)
+        }))
     }
     
     func toPaddingEdgeInsets() -> EdgeInsets? {
