@@ -4,7 +4,7 @@ import SwiftUI
 struct NetworkImage: View {
 
   let url: URL?
-    let mode: String?
+  let mode: String?
 
   var body: some View {
         if let url = url, let imageData = try? Data(contentsOf: url),
@@ -20,8 +20,7 @@ struct NetworkImage: View {
             }
         }
         else {
-            Image(uiImage: UIImage(data: Data())!)
+            Image(systemName: "square.dashed")
         }
-    
   }
 }
