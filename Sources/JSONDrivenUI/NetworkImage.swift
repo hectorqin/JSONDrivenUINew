@@ -20,7 +20,15 @@ struct NetworkImage: View {
             }
         }
         else {
-            Image(systemName: "square.dashed")
+            if (mode != nil && mode == "fill") {
+                Image(systemName: "square.dashed")
+                    .resizable()
+                    .scaledToFill()
+            } else {
+                Image(systemName: "square.dashed")
+                    .resizable()
+                    .scaledToFit()
+            }
         }
   }
 }
