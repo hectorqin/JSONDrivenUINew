@@ -104,8 +104,19 @@ internal struct ViewFactory: PresentableProtocol {
     // MARK: - Text
 
     @ViewBuilder func text() -> some View {
-        let fontHashValue = material.properties?.font ?? "body"
-        let font = Font.pick[fontHashValue]
+        let font: Font
+        if let fontSize = material.properties?.fontSize {
+            let fontName = material.properties?.fontName ?? "system"
+            if fontName == "system" {
+                font = Font.system(size: fontSize)
+            } else {
+                font = Font.custom(fontName, size: fontSize)
+            }
+        } else {
+            let fontHashValue = material.properties?.font ?? "body"
+            font = Font.pick[fontHashValue]
+        }
+        
         let fontWeightHashValue = material.properties?.fontWeight ?? "regular"
         let fontWeight = Font.Weight.pick[fontWeightHashValue]
         Text(material.values?.text ?? "")
