@@ -9,8 +9,12 @@ import SwiftUI
 import UIKit
 
 internal class ViewProperties: Codable {
-    var font: String? = "body"
+    var font: String? = "body" // font presets
     var fontWeight: String? = "body"
+    
+    var fontName: String?
+    var fontSize: Int?
+    
     var foregroundColor: String? = "#ffffff" // Hex
     var backgroundColor: String? = "#ffffff00" // Hex
     var borderColor: String? = "#ff0000" // Hex
