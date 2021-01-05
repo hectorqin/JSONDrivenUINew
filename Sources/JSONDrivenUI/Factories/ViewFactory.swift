@@ -25,8 +25,10 @@ internal struct ViewFactory: PresentableProtocol {
         var font: Font
         if let fontSize = material.properties?.fontSize {
             let fontName = material.properties?.fontName ?? "system"
+            let fontDesign = Font.Design.pick[material.properties?.fontDesign ?? "default"] ?? Font.Design.default
+            let fontWight = Font.Weight.pick[material.properties?.fontWeight ?? "regular"] ?? Font.Weight.regular
             if fontName == "system" {
-                font = Font.system(size: CGFloat(fontSize))
+                font = Font.system(size: CGFloat(fontSize), weight: fontWight, design: fontDesign)
             } else {
                 font = Font.custom(fontName, size: CGFloat(fontSize))
             }

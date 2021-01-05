@@ -10,11 +10,12 @@ import UIKit
 
 internal class ViewProperties: Codable {
     var font: String? = "body" // font presets
-    var fontWeight: String? = "body"
+    var fontWeight: String? = "regular"
     
     var fontName: String?
-    var fontSize: Int?
+    var fontSize: Double?
     var fontStyle: String?
+    var fontDesign: String?
     
     var foregroundColor: String? = "#ffffff" // Hex
     var backgroundColor: String? = "#ffffff00" // Hex
@@ -106,6 +107,16 @@ extension SwiftUI.Font {
         "callout": .callout,
         "footnote": .footnote,
         "caption": .caption
+    ]
+}
+
+// Font Design
+extension SwiftUI.Font.Design {
+    static let pick: [String: Font.Design] = [
+        "default": .default,
+        "monospaced": .monospaced,
+        "rounded": .rounded,
+        "serif": .serif,
     ]
 }
 

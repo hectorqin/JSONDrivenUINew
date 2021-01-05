@@ -19,8 +19,8 @@ struct JSONUIPreview: View {
             "subviews":[
                 {"type": "LinearGradient", "values": {"gradient": "#A82323,#000000", "direction": "0,1 1,0.3"}},
                 {"type":"Image","values":{"imageUrl":"https://xinxiao.tech/assets/products/duohui.png"},"properties":{"width":100,"height":40, "scaleMode": "fill", "clipContent": true}},
-                {"type":"Text","values":{"text":"Steven Cheng Da Da"},
-                "properties":{"fontName":"New York","foregroundColor":"#ffffff","fontSize":20, "fontStyle": "bold lowercaseSmallCaps", "shadow": "2 2 1 #00000055", "width": 200, "height": 200, "alignment": "topCenter"}}
+                {"type":"Text","values":{"text":"Steven Cheng"},
+                "properties":{"fontSize": 52, "foregroundColor":"#ffffff", "fontStyle": "bold lowercaseSmallCaps", "fontDesign": "default", "shadow": "2 2 1 #00000055", "width": 200, "height": 200, "alignment": "topCenter"}}
             ]
         
         }
