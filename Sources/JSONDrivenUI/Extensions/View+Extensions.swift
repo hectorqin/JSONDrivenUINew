@@ -22,7 +22,7 @@ extension Collection where Indices.Iterator.Element == Index {
 }
 
 extension View {
-    @ViewBuilder func conditionalModifier<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+    @ViewBuilder func conditionalModifier<Content: View>(_ condition: Bool, _ transform: (Self) -> Content) -> some View {
         if condition {
             transform(self)
         } else {
