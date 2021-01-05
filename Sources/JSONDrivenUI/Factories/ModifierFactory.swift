@@ -17,11 +17,10 @@ internal struct ModifierFactory {
         var alignment: Alignment? = .center
 
         @ViewBuilder func body(content: Content) -> some View {
-            if (clipContent != nil && clipContent == true) {
-                content.frame(width: width, height: height, alignment: alignment ?? .center).clipped()
-            } else {
-                content.frame(width: width, height: height, alignment: alignment ?? .center)
-            }
+            content.frame(width: width, height: height, alignment: alignment ?? .center)
+                .conditionalModifier(clipContent != nil && clipContent == true, {
+                    $0.clipped()
+                })
         }
     }
     

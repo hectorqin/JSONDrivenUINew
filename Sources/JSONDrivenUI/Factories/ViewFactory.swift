@@ -22,7 +22,7 @@ internal struct ViewFactory: PresentableProtocol {
     }
     
     func parseFont() -> Font {
-        let font: Font
+        var font: Font
         if let fontSize = material.properties?.fontSize {
             let fontName = material.properties?.fontName ?? "system"
             if fontName == "system" {
@@ -33,6 +33,26 @@ internal struct ViewFactory: PresentableProtocol {
         } else {
             let fontHashValue = material.properties?.font ?? "body"
             font = Font.pick[fontHashValue] ?? Font.body
+        }
+        if let fontStyle = material.properties?.fontStyle {
+            let fontStyleSegments = fontStyle.components(separatedBy: " ")
+            for style in fontStyleSegments {
+                switch style {
+                case "bold":
+                    font = font.bold()
+                case "italic":
+                    font = font.italic()
+                case "smallCaps":
+                    font = font.smallCaps()
+                case "lowercaseSmallCaps":
+                    font = font.lowercaseSmallCaps()
+                case "uppercaseSmallCaps":
+                    font = font.uppercaseSmallCaps()
+                case "monospacedDigit":
+                    font = font.monospacedDigit()
+                default: break
+                }
+            }
         }
         return font
     }
@@ -143,28 +163,27 @@ internal struct ViewFactory: PresentableProtocol {
 
     @ViewBuilder func image() -> some View {
         if let systemIconName = material.values?.systemIconName {
-            if (material.properties?.scaleMode == "fill") {
-                Image(systemName: systemIconName)
-                    .resizable().scaledToFill()
-            } else {
-                Image(systemName: systemIconName)
-                    .resizable().scaledToFit()
-            }
+            Image(systemName: systemIconName)
+                .resizable()
+                .conditionalModifier(material.properties?.scaleMode == "fill", {
+                    $0.scaledToFill()
+                }, {
+                    $0.scaledToFit()
+                })
+            
         } else if let localIconName = material.values?.localImageName {
-            if (material.properties?.scaleMode == "fill") {
-                Image(localIconName)
-                    .resizable().scaledToFill()
-            } else {
-                Image(localIconName)
-                    .resizable().scaledToFit()
-            }
+            Image(localIconName)
+                .resizable()
+                .conditionalModifier(material.properties?.scaleMode == "fill", {
+                    $0.scaledToFill()
+                }, {
+                    $0.scaledToFit()
+                })
         } else if let remoteUrl = material.values?.imageUrl {
             NetworkImage(url: URL(string: remoteUrl), mode: material.properties?.scaleMode)
         } else {
             Text("Image value could not read")
         }
-        
-        
     }
 
     // MARK: - Spacer

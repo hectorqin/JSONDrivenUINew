@@ -9,26 +9,24 @@ struct NetworkImage: View {
   var body: some View {
         if let url = url, let imageData = try? Data(contentsOf: url),
            let uiImage = UIImage(data: imageData) {
-            if (mode != nil && mode == "fill") {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-            } else {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFit()
-            }
+            Image(uiImage: uiImage)
+                .resizable()
+                .conditionalModifier(mode != nil && mode == "fill", {
+                    $0.scaledToFill()
+                }, {
+                    $0.scaledToFit()
+                })
+                
         }
         else {
-            if (mode != nil && mode == "fill") {
-                Image(systemName: "square.dashed")
-                    .resizable()
-                    .scaledToFill()
-            } else {
-                Image(systemName: "square.dashed")
-                    .resizable()
-                    .scaledToFit()
-            }
+            Image(systemName: "square.dashed")
+                .resizable()
+                .conditionalModifier(mode != nil && mode == "fill", {
+                    $0.scaledToFill()
+                }, {
+                    $0.scaledToFit()
+                })
+
         }
   }
 }

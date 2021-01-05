@@ -20,3 +20,22 @@ extension Collection where Indices.Iterator.Element == Index {
         return indices.contains(index) ? self[index] : nil
     }
 }
+
+extension View {
+    @ViewBuilder func conditionalModifier<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
+    
+    typealias ContentTransform<Content: View> = (Self) -> Content
+    @ViewBuilder func conditionalModifier<TrueContent: View, FalseContent: View>( _ condition: Bool, _ ifTrue: ContentTransform<TrueContent>, _ ifFalse: ContentTransform<FalseContent>) -> some View {
+        if condition {
+            ifTrue(self)
+        } else {
+            ifFalse(self)
+        }
+    }
+}
