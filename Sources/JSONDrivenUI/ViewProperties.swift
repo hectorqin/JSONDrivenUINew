@@ -43,6 +43,7 @@ internal class ViewProperties: Codable {
 
     /// chart settings
     var chartStyle: String? = Chart.Style.line.rawValue
+    var chartLineChartPaddingTopPercentage: Double? = 0
     var chartLineChartPaddingBottomPercentage: Double? = 0
     
     /// img

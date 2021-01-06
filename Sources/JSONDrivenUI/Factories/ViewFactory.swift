@@ -202,6 +202,7 @@ internal struct ViewFactory: PresentableProtocol {
               data: material.values?.chartData,
               backgroundColor: material.properties?.backgroundColor.toColor(),
               foregroundColor: material.properties?.foregroundColor.toColor(),
+              paddingTopPercentage: material.properties?.chartLineChartPaddingTopPercentage,
               paddingBottomPercentage: material.properties?.chartLineChartPaddingBottomPercentage)
     }
     
