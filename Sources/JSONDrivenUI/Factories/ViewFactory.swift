@@ -236,7 +236,6 @@ internal struct ViewFactory: PresentableProtocol {
         Circle().fill(material.values?.fill.toColor() ?? .primary)
     }
 
-
     @ViewBuilder func buildDefault() -> some View {
         switch material.type {
         case .ScrollView: scrollView()
@@ -263,6 +262,7 @@ internal struct ViewFactory: PresentableProtocol {
 
         let uiComponent = buildDefault().embedInAnyView()
         uiComponent
+            .modifier(ModifierFactory.OpacityModifier(opacity: prop?.opacity))
             .modifier(ModifierFactory.PaddingModifier(padding: prop?.padding.toPaddingEdgeInsets()))
             .modifier(ModifierFactory.ForegroundModifier(foregroundColor: prop?.foregroundColor.toColor()))
             .modifier(ModifierFactory.BackgroundModifier(backgroundColor: prop?.backgroundColor.toColor()))

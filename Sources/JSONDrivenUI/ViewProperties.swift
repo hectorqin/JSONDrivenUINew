@@ -29,7 +29,8 @@ internal class ViewProperties: Codable {
     var alignment: String?
     var minLength: Float? // Spacer
     
-    var cornerRadius: Float?
+    var cornerRadius: Float? = 0
+    var opacity: Float? = 1
     
     var shadow: String?
 

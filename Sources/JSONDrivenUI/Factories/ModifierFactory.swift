@@ -37,6 +37,18 @@ internal struct ModifierFactory {
         }
     }
     
+    struct OpacityModifier: ViewModifier {
+        var opacity: Float?
+        
+        @ViewBuilder func body(content: Content) -> some View {
+            if let opa = opacity {
+                content.opacity(opa)
+            } else {
+                content
+            }
+        }
+    }
+    
     struct BackgroundModifier: ViewModifier {
         var backgroundColor: Color?
         
