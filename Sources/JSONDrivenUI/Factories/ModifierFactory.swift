@@ -42,7 +42,7 @@ internal struct ModifierFactory {
         
         @ViewBuilder func body(content: Content) -> some View {
             if let opa = opacity {
-                content.opacity(opa)
+                content.opacity(Double(opa))
             } else {
                 content
             }
