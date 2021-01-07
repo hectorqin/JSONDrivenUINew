@@ -18,6 +18,9 @@ internal class Values: Codable {
     // for Color
     var hex: String?
     
+    // Rectangle and Circle
+    var fill: String?
+    
     // for Chart
     var chartData: [Double]?
     

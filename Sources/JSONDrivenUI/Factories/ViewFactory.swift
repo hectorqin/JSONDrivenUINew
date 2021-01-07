@@ -172,6 +172,7 @@ internal struct ViewFactory: PresentableProtocol {
                 }, {
                     $0.scaledToFit()
                 })
+                .cornerRadius(material.properties?.cornerRadius.toCGFloat() ?? 0)
             
         } else if let localIconName = material.values?.localImageName {
             Image(localIconName)
@@ -181,8 +182,9 @@ internal struct ViewFactory: PresentableProtocol {
                 }, {
                     $0.scaledToFit()
                 })
+                .cornerRadius(material.properties?.cornerRadius.toCGFloat() ?? 0)
         } else if let remoteUrl = material.values?.imageUrl {
-            NetworkImage(url: URL(string: remoteUrl), mode: material.properties?.scaleMode)
+            NetworkImage(url: URL(string: remoteUrl), mode: material.properties?.scaleMode).cornerRadius(material.properties?.cornerRadius.toCGFloat() ?? 0)
         } else {
             Text("Image value could not read")
         }
@@ -221,6 +223,19 @@ internal struct ViewFactory: PresentableProtocol {
         LinearGradient(gradient: gradient, startPoint: direction.from, endPoint: direction.to)
             .ignoresSafeArea()
     }
+    
+    // MARK: - Rectangle
+
+    @ViewBuilder func rectangle() -> some View {
+        Rectangle().fill(material.values?.fill.toColor() ?? .primary)
+    }
+    
+    // MARK: - Circle
+
+    @ViewBuilder func circle() -> some View {
+        Circle().fill(material.values?.fill.toColor() ?? .primary)
+    }
+
 
     @ViewBuilder func buildDefault() -> some View {
         switch material.type {
@@ -236,9 +251,9 @@ internal struct ViewFactory: PresentableProtocol {
         case .Chart: chart()
         case .Color: color()
         case .LinearGradient: lineargradient()
-        case .Rectangle: Rectangle()
+        case .Rectangle: rectangle()
         case .Divider: Divider()
-        case .Circle: Circle()
+        case .Circle: circle()
         default: EmptyView()
         }
     }
