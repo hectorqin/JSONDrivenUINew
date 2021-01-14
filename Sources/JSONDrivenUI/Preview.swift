@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct JSONUIPreview: View {
-    let date: Date = Date()
+    let date = Date()
     var body: some View {
         let sampleJSON = """
         {
@@ -22,7 +22,7 @@ struct JSONUIPreview: View {
                 {"type":"Text","values":{"text":"Steven Cheng"},
                 "properties":{"fontSize": 52, "foregroundColor":"#ffffff", "fontStyle": "bold lowercaseSmallCaps", "fontDesign": "default", "shadow": "2 2 1 #00000055", "width": 200, "height": 200, "alignment": "topCenter"}}
             ]
-        
+
         }
         """
 //        let sampleJSON = """
@@ -32,11 +32,51 @@ struct JSONUIPreview: View {
     }
 }
 
+struct JUICornerRadiusPreview: View {
+    let date = Date()
+    var body: some View {
+        let sampleJSON = """
+        {
+          "type": "HStack",
+          "properties": {
+            "cornerRadius": 4,
+            "width": 200,
+            "height": 8
+          },
+          "subviews": [
+            {
+              "type": "HStack",
+              "properties": {
+                "backgroundColor": "#808080",
+                "width": 200,
+                "height": 8
+              },
+              "subviews": [
+                {
+                  "type": "Rectangle",
+                  "properties": {
+                    "backgroundColor": "#333333",
+                    "width": 100,
+                    "height": 8
+                  }
+                },
+                {
+                  "type": "Spacer"
+                }
+              ]
+            }
+          ]
+        }
+        """
+        JSONDataView(json: sampleJSON.data(using: .utf8)!, date: date)
+    }
+}
 
 struct JSONUIPreview_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             JSONUIPreview()
+            JUICornerRadiusPreview()
         }
     }
 }

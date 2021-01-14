@@ -172,7 +172,6 @@ internal struct ViewFactory: PresentableProtocol {
                 }, {
                     $0.scaledToFit()
                 })
-                .cornerRadius(material.properties?.cornerRadius.toCGFloat() ?? 0)
             
         } else if let localIconName = material.values?.localImageName {
             Image(localIconName)
@@ -182,9 +181,8 @@ internal struct ViewFactory: PresentableProtocol {
                 }, {
                     $0.scaledToFit()
                 })
-                .cornerRadius(material.properties?.cornerRadius.toCGFloat() ?? 0)
         } else if let remoteUrl = material.values?.imageUrl {
-            NetworkImage(url: URL(string: remoteUrl), mode: material.properties?.scaleMode).cornerRadius(material.properties?.cornerRadius.toCGFloat() ?? 0)
+            NetworkImage(url: URL(string: remoteUrl), mode: material.properties?.scaleMode)
         } else {
             Text("Image value could not read")
         }
@@ -263,6 +261,7 @@ internal struct ViewFactory: PresentableProtocol {
         let uiComponent = buildDefault().embedInAnyView()
         uiComponent
             .modifier(ModifierFactory.OpacityModifier(opacity: prop?.opacity))
+            .modifier(ModifierFactory.CornerRadiusModifier(cornerRadius: prop?.cornerRadius))
             .modifier(ModifierFactory.PaddingModifier(padding: prop?.padding.toPaddingEdgeInsets()))
             .modifier(ModifierFactory.ForegroundModifier(foregroundColor: prop?.foregroundColor.toColor()))
             .modifier(ModifierFactory.BackgroundModifier(backgroundColor: prop?.backgroundColor.toColor()))

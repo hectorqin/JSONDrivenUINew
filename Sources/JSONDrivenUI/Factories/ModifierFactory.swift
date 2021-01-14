@@ -37,6 +37,18 @@ internal struct ModifierFactory {
         }
     }
     
+    struct CornerRadiusModifier: ViewModifier {
+        var cornerRadius: Float?
+        
+        @ViewBuilder func body(content: Content) -> some View {
+            if let radius = cornerRadius {
+                content.cornerRadius(CGFloat(radius))
+            } else {
+                content
+            }
+        }
+    }
+    
     struct OpacityModifier: ViewModifier {
         var opacity: Float?
         
