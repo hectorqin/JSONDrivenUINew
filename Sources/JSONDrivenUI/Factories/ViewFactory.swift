@@ -144,10 +144,14 @@ internal struct ViewFactory: PresentableProtocol {
     @ViewBuilder func text() -> some View {
         let font = parseFont()
         let fontWeightHashValue = material.properties?.fontWeight ?? "regular"
+        let lineLimit = material.properties?.lineLimit
         let fontWeight = Font.Weight.pick[fontWeightHashValue]
         Text(material.values?.text ?? "")
             .font(font)
             .fontWeight(fontWeight)
+            .conditionalModifier(lineLimit != nil, {
+                $0.lineLimit(lineLimit)
+            })
     }
 
     // MARK: - Timer

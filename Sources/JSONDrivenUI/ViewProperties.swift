@@ -17,6 +17,8 @@ internal class ViewProperties: Codable {
     var fontStyle: String?
     var fontDesign: String?
     
+    var lineLimit: Int?
+    
     var foregroundColor: String? = "#ffffff" // Hex
     var backgroundColor: String? = "#ffffff00" // Hex
     var borderColor: String? = "#ff0000" // Hex
