@@ -237,6 +237,20 @@ internal struct ViewFactory: PresentableProtocol {
     @ViewBuilder func circle() -> some View {
         Circle().fill(material.values?.fill.toColor() ?? .primary)
     }
+    
+    // MARK: - Link
+
+    @ViewBuilder func link() -> some View {
+        if let subviews = material.subviews {
+            Link(destination: URL(string: material.values?.url ?? "")!) {
+                ForEach(subviews) {
+                    ViewFactory(material: $0).toPresentable()
+                }
+            }
+        } else {
+            Text("Please Add Subview for Link")
+        }
+    }
 
     @ViewBuilder func buildDefault() -> some View {
         switch material.type {
@@ -255,6 +269,7 @@ internal struct ViewFactory: PresentableProtocol {
         case .Rectangle: rectangle()
         case .Divider: Divider()
         case .Circle: circle()
+        case .Link: link()
         default: EmptyView()
         }
     }

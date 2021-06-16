@@ -27,6 +27,9 @@ internal class Values: Codable {
     // for LinearGradient
     var direction: String?
     var gradient: String?
+    
+    /// Link
+    var url: String?
 }
 
 extension Text.DateStyle {

@@ -23,4 +23,5 @@ internal enum ViewType: String, Codable {
     case Chart      = "Chart"
     case Color      = "Color"
     case LinearGradient      = "LinearGradient"
+    case Link       = "Link"
 }
